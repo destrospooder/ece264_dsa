@@ -27,6 +27,7 @@ PROCESSING COMMAND: create d99 stack
 PROCESSING COMMAND: push d99 0.123
 PROCESSING COMMAND: push d99 -0.456
 PROCESSING COMMAND: pop d99 -0.456
+Value popped: -0.456
 PROCESSING COMMAND: pop s99 -0.456
 ERROR: This list is empty!
 PROCESSING COMMAND: push dHelloWorld 0.5
@@ -53,7 +54,9 @@ PROCESSING COMMAND: push dHelloWorld 3.1415
 PROCESSING COMMAND: push dHelloPlanet -60.5
 PROCESSING COMMAND: push dHelloWorld -1
 PROCESSING COMMAND: pop dHelloWorld -1
+Value popped: -1
 PROCESSING COMMAND: pop dHelloPlanet -1
+Value popped: -60.5
 PROCESSING COMMAND: pop sR2D2 -1
 ERROR: This name already exists!
 PROCESSING COMMAND: create sR2D2 queue
@@ -68,6 +71,8 @@ Value popped: G4H5I6j7k8l9
 PROCESSING COMMAND: pop sR2D2 G4H5I6j7k8l9
 ERROR: This list is empty!
 PROCESSING COMMAND: pop dHelloWorld G4H5I6j7k8l9
+Value popped: 3.1415
 PROCESSING COMMAND: pop dHelloWorld G4H5I6j7k8l9
+Value popped: 3.14
 PROCESSING COMMAND: pop dHelloWorld G4H5I6j7k8l9
 ERROR: This list is empty!

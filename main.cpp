@@ -245,7 +245,7 @@ void billy() {
                     output << "ERROR: This list is empty!\n";
                     continue;
                 }
-                doubleList[box[1]] -> pop();
+                output << "Value popped: " << doubleList[box[1]] -> pop() << "\n";
                 continue;
             }
             if (box[1].substr(0,1) == "s"){
