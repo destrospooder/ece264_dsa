@@ -177,8 +177,8 @@ void billy() {
     string box[3];
     string bob;
     while (input.peek() != EOF) {
-        output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<" "<<box[2]<<"\n";
         tokenizer(box, input);
+        output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<" "<<box[2]<<"\n";
         cout << box[0] << box[1] << box[2] << "\n";
         if (box[0] == "create"){
             if (duplicateFind(box[1], labelList)){
