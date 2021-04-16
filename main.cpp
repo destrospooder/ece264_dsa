@@ -90,7 +90,7 @@ template <typename Type> class simpleList{
         // pour = removing the node from the front
         Type pour(){
             if(isEmpty()){
-                cout << "it brokey :(\n";
+                cout << "ERROR: This list is empty!\n";
                 return 0;
             }
             Type hopper = first -> getData();
@@ -211,34 +211,38 @@ void billy() {
         }
         if (box[0] == "push"){
             if (!duplicateFind(box[1], labelList)){
+                output << "ERROR: This name already exists!\n";
                 continue;
             }
             if (box[1].substr(0,1) == "i"){
-                intList[box[1]] -> push(stoi(box[1]));
+                intList[box[1]] -> push(stoi(box[2]));
                 continue;
             }
             if (box[1].substr(0,1) == "d"){
-                doubleList[box[1]] -> push(stod(box[1]));
+                doubleList[box[1]] -> push(stod(box[2]));
                 continue;
             }
             if (box[1].substr(0,1) == "s"){
-                stringList[box[1]] -> push(box[1]);
+                stringList[box[1]] -> push(box[2]);
                 continue;
             }
         }
         if (box[0] == "pop"){
             if (!duplicateFind(box[1], labelList)) {
+                output << "ERROR: This name already exists!\n";
                 continue;
             }
             if (box[1].substr(0,1) == "i"){
                 if(intList[box[1]] -> isEmpty()){
+                    output << "ERROR: This list is empty!\n";
                     continue;
                 }
-                intList[box[1]] -> pop();
+                output << "Value popped: " << intList[box[1]] -> pop() << "\n";
                 continue;
             }
             if (box[1].substr(0,1) == "d"){
                 if(doubleList[box[1]] -> isEmpty()){
+                    output << "ERROR: This list is empty!\n";
                     continue;
                 }
                 doubleList[box[1]] -> pop();
@@ -246,9 +250,10 @@ void billy() {
             }
             if (box[1].substr(0,1) == "s"){
                 if(stringList[box[1]] -> isEmpty()){
+                    output << "ERROR: This list is empty!\n";
                     continue;
                 }
-                stringList[box[1]] -> pop();
+                output << "Value popped: " << stringList[box[1]] -> pop() << "\n";
                 continue;
             }
         }
