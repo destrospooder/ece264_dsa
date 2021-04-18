@@ -142,7 +142,7 @@ void tokenizer(string box[], ifstream& input){
     }
 }
 
-//Boolean function that searches for duplicate names, used in billy()
+//Boolean function that searches for duplicate names and absence thereof, used in billy()
 
 bool duplicateFind(string label, list<string> labels){
     for(string &listlabel : labels){
@@ -187,8 +187,13 @@ void billy() {
     string bob;
     while (input.peek() != EOF) {
         tokenizer(box, input);
-        output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<" "<<box[2]<<"\n";
-        cout << box[0] << box[1] << box[2] << "\n";
+        if (box[0] == "pop"){
+            output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<"\n";
+        }
+        else{
+            output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<" "<<box[2]<<"\n";
+        }
+
         if (box[0] == "create"){
             if (duplicateFind(box[1], labelList)){
                 output << "ERROR: This name already exists!\n";
@@ -220,7 +225,7 @@ void billy() {
         }
         if (box[0] == "push"){
             if (!duplicateFind(box[1], labelList)){
-                output << "ERROR: This name already exists!\n";
+                output << "ERROR: This name does not exist!\n";
                 continue;
             }
             if (box[1].substr(0,1) == "i"){
@@ -238,7 +243,7 @@ void billy() {
         }
         if (box[0] == "pop"){
             if (!duplicateFind(box[1], labelList)) {
-                output << "ERROR: This name already exists!\n";
+                output << "ERROR: This name does not exist!\n";
                 continue;
             }
             if (box[1].substr(0,1) == "i"){
