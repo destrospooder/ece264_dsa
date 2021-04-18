@@ -1,10 +1,18 @@
+//ECE264 - Data Structures and Algorithms I
+//Benjamin Aziel
+//Due April 27, 2021
+//Prof. Carl Sable
+//This program manipulates a manual implementation of stacks and queues. It goes through an input file with various commands (push, pop, create), executes the commands, and outputs a file
+
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
 #include <list>
 #include <map>
+
 using namespace std;
+
+//Initializing simpleList for Stack and Queue classes
 
 template <typename Type> class simpleList{
     private:
@@ -22,10 +30,6 @@ template <typename Type> class simpleList{
                     return data;
                 }
 
-                void setData(Type data) {
-                    Node::data = data;
-                }
-
                 Node *getNext() const {
                     return next;
                 }
@@ -38,7 +42,6 @@ template <typename Type> class simpleList{
         struct Node* first;
         struct Node* last;
         int size;
-        string name;
 
     public:
         simpleList(){
@@ -46,20 +49,14 @@ template <typename Type> class simpleList{
             last = nullptr;
             size = 0;
         }
-        int getSize() const {
-            return size;
-        }
         bool isEmpty(){
             return size == 0;
         }
         virtual void push(Type t) = 0;
         virtual Type pop() = 0;
 
-        const string &getName() const {
-            return name;
-        }
+        //cap = Attaching the node at the front
 
-    // cap = attaching the node at the front
         void cap(Type t){
             Node* index = new Node(t);
             if(isEmpty()){
@@ -73,7 +70,8 @@ template <typename Type> class simpleList{
             }
         }
 
-        // cup = attaching the node at the back
+        //cup = Attaching the node at the back
+
         void cup(Type t){
             Node* index = new Node(t);
             if(isEmpty()){
@@ -87,7 +85,8 @@ template <typename Type> class simpleList{
             }
         }
 
-        // pour = removing the node from the front
+        //pour = Removing the node from the front
+
         Type pour(){
             if(isEmpty()){
                 cout << "ERROR: This list is empty!\n";
@@ -107,12 +106,10 @@ template <typename Type> class simpleList{
         }
 };
 
-// Implemented Stack and Queue using Cap, Cup, and Pour!
-
+//Implemented Stack and Queue classes using cap, cup, and pour
 
 template <typename Type> class stack:public simpleList<Type>{
     public:
-
     void push(Type t){
             this -> cap(t);
         }
@@ -132,6 +129,8 @@ template <typename Type> class queue:public simpleList<Type>{
         }
 };
 
+//Function that converts (tokenizes) input into string arrays
+
 void tokenizer(string box[], ifstream& input){
     input >> box[0];
     if(box[0] == "pop"){
@@ -143,17 +142,7 @@ void tokenizer(string box[], ifstream& input){
     }
 }
 
-//Basic file reader
-//Opens input, creates output, prints and stores strings
-
-
-//template<typename Type> simpleList <Type> listFind(string label, list<simpleList<Type>*> labels){
-//    for(typename list<simpleList<Type>*> :: iterator it = labels.begin(); it != labels.end(); it++){
-//        if(it.getName() == label) {
-//            return it;
-//        }
-//    }
-//}
+//Boolean function that searches for duplicate names, used in billy()
 
 bool duplicateFind(string label, list<string> labels){
     for(string &listlabel : labels){
@@ -164,16 +153,36 @@ bool duplicateFind(string label, list<string> labels){
     return false;
 }
 
+//Basic file reader
+//Opens input, creates output, prints and stores strings
+//Loop reads each line of the file, then breaks each line into its components
+
+//1: "push" "pop" "create"
+//2: Name
+//3: push/pop: whatever you're pushing && create: "stack" "queue"
+
+//Reads in one word at a time. If doing create or push, reads in two more words; if doing pull, reads in one
+
 void billy() {
     map <string, simpleList<int> *> intList;
     map <string, simpleList<double> *> doubleList;
     map <string, simpleList<string> *> stringList;
     vector<string> tokens;
+
     ifstream input;
     ofstream output;
     list<string> labelList;
-    input.open("input.txt");
-    output.open("output.txt");
+
+    //Prompts user to provide names for input/output files
+
+    string inName, outName;
+    cout << "Enter name of input file: ";
+    getline(cin, inName);
+    cout << "Enter name of output file: ";
+    getline(cin, outName);
+    input.open(inName);
+    output.open(outName);
+
     string box[3];
     string bob;
     while (input.peek() != EOF) {
@@ -262,17 +271,7 @@ void billy() {
     output.close();
 }
 
-//Read in one word at a time. If doing create or push, read in two more words; if doing pull, read in one.
-//Create some function that does the create/pop/push stuff using two arguments each
-
 int main(){
     billy();
     return 0;
 }
-
-//Make a loop that reads each line of the file, then breaks each line into its components
-//1: "push" "pop" "create"
-//2: Name
-//3: push/pop: whatever you're pushing && create: "stack" "queue"
-
-//Need to make a file writer
