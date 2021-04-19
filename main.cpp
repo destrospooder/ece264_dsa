@@ -132,6 +132,10 @@ template <typename Type> class queue:public simpleList<Type>{
 //Function that converts (tokenizes) input into string arrays
 
 void tokenizer(string box[], ifstream& input){
+    box[0] = "";
+    box[1] = "";
+    box[2] = "";
+
     input >> box[0];
     if(box[0] == "pop"){
         input >> box[1];
@@ -187,6 +191,11 @@ void billy() {
     string bob;
     while (input.peek() != EOF) {
         tokenizer(box, input);
+
+        if(box[0].empty()){
+            continue;
+        }
+
         if (box[0] == "pop"){
             output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<"\n";
         }
