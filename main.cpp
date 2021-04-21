@@ -2,7 +2,10 @@
 //Benjamin Aziel
 //Due April 27, 2021
 //Prof. Carl Sable
-//This program manipulates a manual implementation of stacks and queues. It goes through an input file with various commands (push, pop, create), executes the commands, and outputs a file
+
+//This program manipulates a manual implementation of stacks and
+//queues. It goes through an input file with various commands (push,
+//pop, create), executes the commands, and outputs a file.
 
 #include <iostream>
 #include <fstream>
@@ -130,6 +133,7 @@ template <typename Type> class queue:public simpleList<Type>{
 };
 
 //Function that converts (tokenizes) input into string arrays
+//Clears the box before each iteration to mitigate unwanted outputs when prompted with newline
 
 void tokenizer(string box[], ifstream& input){
     box[0] = "";
@@ -165,7 +169,8 @@ bool duplicateFind(string label, list<string> labels){
 //2: Name
 //3: push/pop: whatever you're pushing && create: "stack" "queue"
 
-//Reads in one word at a time. If doing create or push, reads in two more words; if doing pull, reads in one
+//Reads in one word at a time. If doing create or push, reads in two more
+//words; if doing pull, reads in one
 
 void billy() {
     map <string, simpleList<int> *> intList;
@@ -188,13 +193,14 @@ void billy() {
     output.open(outName);
 
     string box[3];
-    string bob;
     while (input.peek() != EOF) {
         tokenizer(box, input);
 
         if(box[0].empty()){
             continue;
         }
+
+        //pop only outputs box[0] and box[1], push and create also output box[2]
 
         if (box[0] == "pop"){
             output << "PROCESSING COMMAND: " << box[0]<<" "<<box[1]<<"\n";
