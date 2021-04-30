@@ -23,6 +23,7 @@ public:
     string ssn;
 };
 
+
 // Load the data from a specified input file
 void loadDataList(list<Data *> &l, const string &filename) {
 
