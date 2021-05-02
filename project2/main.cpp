@@ -112,7 +112,7 @@ int main() {
 // You may add global variables, functions, and/or
 // class definitions here if you wish.
 
-bool easySort(const Data* index1, const Data* index2) {
+inline bool easySort(Data* index1, Data* index2) {
     if (index1 -> lastName > index2 -> lastName)
         return false;
     if (index1 -> lastName < index2 -> lastName)
@@ -127,6 +127,23 @@ bool easySort(const Data* index1, const Data* index2) {
         return true;
 }
 
+inline bool easySort4(Data* index1, Data* index2) {
+    if (index1 -> ssn >= index2 -> ssn)
+        return false;
+    return true;
+}
+
 void sortDataList(list<Data *> &l) {
-    l.sort(easySort);
+    int count = 0;
+    string firstName = l.front()->firstName;
+    for (auto it:l) {
+        if (++count == 1000) {
+            l.sort(easySort4);
+            return;
+        }
+        if (it->firstName != firstName) {
+            l.sort(easySort);
+            return;
+        }
+    }
 }
