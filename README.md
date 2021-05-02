@@ -1,5 +1,5 @@
 # ECE264 - Data Structures and Algorithms I
-##### Spring 2021
+## Spring 2021
 
 **Instructor:** Carl Sable<br/>
 **Email:** carl.sable@cooper.edu<br/>
