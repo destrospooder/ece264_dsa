@@ -152,18 +152,18 @@ int maxVal(const int randomArr[], int m){
 
 void countSort(int rawArr[], int size, int digit){
     int bucket[10] = {0};
-    for(int i = 0; i < size; i++){
-        bucket[(rawArr[i] / digit)%10]++;
+    for(int x = 0; x < size; x++){
+        bucket[(rawArr[x] / digit)%10]++;
     }
     for(int indicator = 1; indicator < 10; indicator++){
         bucket[indicator] += bucket[indicator - 1];
     }
-    for(int j = size - 1; j >=0; j--){
-        bigArr[bucket[(rawArr[j] / digit)%10] - 1] = rawArr[j];
-        bucket[(rawArr[j] / digit)%10]--;
+    for(int y = size - 1; y >=0; y--){
+        bigArr[bucket[(rawArr[y] / digit)%10] - 1] = rawArr[y];
+        bucket[(rawArr[y] / digit)%10]--;
     }
-    for(int k = 0; k < size; k++){
-        rawArr[k] = bigArr[k];
+    for(int z = 0; z < size; z++){
+        rawArr[z] = bigArr[z];
     }
 }
 
@@ -189,19 +189,19 @@ void sortDataList(list<Data *> &l) {
     for (auto it:l){
         if (count++ == 1000) {
 //          l.sort(easySort4);
-            for(auto bhat:l){
-                postArr[index] = stoi(bhat -> ssn.substr(0,3) + bhat -> ssn.substr(4,2) + bhat -> ssn.substr(7,4));
+            for(auto inc:l){
+                postArr[index] = stoi(inc -> ssn.substr(0,3) + inc -> ssn.substr(4,2) + inc -> ssn.substr(7,4));
                 index++;
             }
             radix4(postArr, l.size());
-            for(auto bhat2:l){
+            for(auto inc2:l){
                 temp = to_string(postArr[index2++]);
                 while(temp.length() != 9){
                     temp = "0" + temp;
                 }
                 temp.insert(3, "-");
                 temp.insert(6, "-");
-                bhat2 -> ssn = temp;
+                inc2 -> ssn = temp;
             }
             return;
         }
