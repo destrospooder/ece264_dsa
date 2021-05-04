@@ -112,6 +112,16 @@ int main() {
 // You may add global variables, functions, and/or
 // class definitions here if you wish.
 
+//ECE264 - Data Structures and Algorithms I
+//Benjamin Aziel
+//Due May 4, 2021
+//Prof. Carl Sable
+
+//Function definitions are fine
+//For the array, you need to define outside with ~1*10^6
+
+
+
 inline bool easySort(Data* index1, Data* index2) {
     if (index1 -> lastName > index2 -> lastName)
         return false;
@@ -127,6 +137,43 @@ inline bool easySort(Data* index1, Data* index2) {
         return true;
 }
 
+int bigArr[1010000];
+int postArr[1010000];
+
+int maxVal(const int randomArr[], int m){
+    int max = randomArr[0];
+    for(int i = 1; i < m; i++){
+        if(randomArr[i] > max){
+            max = randomArr[i];
+        }
+    }
+    return max;
+}
+
+void countSort(int rawArr[], int size, int digit){
+    int bucket[10] = {0};
+    for(int i = 0; i < size; i++){
+        bucket[(rawArr[i] / digit)%10]++;
+    }
+    for(int indicator = 1; indicator < 10; indicator++){
+        bucket[indicator] += bucket[indicator - 1];
+    }
+    for(int j = size - 1; j >=0; j--){
+        bigArr[bucket[(rawArr[j] / digit)%10] - 1] = rawArr[j];
+        bucket[(rawArr[j] / digit)%10]--;
+    }
+    for(int k = 0; k < size; k++){
+        rawArr[k] = bigArr[k];
+    }
+}
+
+void radix4(int rawArr[], int size){
+    int max = maxVal(rawArr, size);
+    for(int digit = 1; max / digit > 0; digit *= 10){
+        countSort(rawArr, size, digit);
+    }
+}
+
 inline bool easySort4(Data* index1, Data* index2) {
     if (index1 -> ssn >= index2 -> ssn)
         return false;
@@ -134,11 +181,28 @@ inline bool easySort4(Data* index1, Data* index2) {
 }
 
 void sortDataList(list<Data *> &l) {
-    int count = 0;
     string firstName = l.front()->firstName;
-    for (auto it:l) {
-        if (++count == 1000) {
-            l.sort(easySort4);
+    int count = 0;
+    int index = 0;
+    int index2 = 0;
+    string temp;
+    for (auto it:l){
+        if (count++ == 1000) {
+//          l.sort(easySort4);
+            for(auto bhat:l){
+                postArr[index] = stoi(bhat -> ssn.substr(0,3) + bhat -> ssn.substr(4,2) + bhat -> ssn.substr(7,4));
+                index++;
+            }
+            radix4(postArr, l.size());
+            for(auto bhat2:l){
+                temp = to_string(postArr[index2++]);
+                while(temp.length() != 9){
+                    temp = "0" + temp;
+                }
+                temp.insert(3, "-");
+                temp.insert(6, "-");
+                bhat2 -> ssn = temp;
+            }
             return;
         }
         if (it->firstName != firstName) {
